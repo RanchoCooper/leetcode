@@ -28,13 +28,13 @@ type ListNode struct {
 }
 
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
-	headList := new(ListNode)
-	head := headList
+	dummy := new(ListNode)
+	head := dummy
 	num := 0
 
 	for l1 != nil || l2 != nil || num > 0 {
-		headList.Next =  new(ListNode)
-		headList = headList.Next
+		dummy.Next =  new(ListNode)
+		dummy = dummy.Next
 		if l1 != nil {
 			num = num + l1.Val
 			l1 = l1.Next
@@ -43,7 +43,7 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 			num = num + l2.Val
 			l2 = l2.Next
 		}
-		headList.Val = (num) % 10
+		dummy.Val = (num) % 10
 		num = num / 10
 	}
 
