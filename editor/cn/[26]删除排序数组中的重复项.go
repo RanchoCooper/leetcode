@@ -47,20 +47,13 @@ package main
 
 //leetcode submit region begin(Prohibit modification and deletion)
 func removeDuplicates(nums []int) int {
-	if len(nums) == 0 {
-		return 0
-	}
-	last, finder := 0, 0
-	for last < len(nums) {
-		for nums[last] == nums[finder] {
-			finder++
-			if finder == len(nums) {
-				return last + 1
-			}
+	n := 0
+	for i := 0; i < len(nums); i++ {
+		if i == 0 || nums[i] != nums[i-1] {
+			nums[n] = nums[i]
+			n++
 		}
-		nums[last+1] = nums[finder]
-		last++
 	}
-	return last + 1
+	return n
 }
 //leetcode submit region end(Prohibit modification and deletion)
