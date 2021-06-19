@@ -21,14 +21,14 @@ package main
  * }
  */
 func reverseList(head *ListNode) *ListNode {
-	var behind *ListNode
+	var last *ListNode
 
 	for head != nil {
 		next := head.Next
-		head.Next = behind
-		behind = head
+		head.Next = last
+		last = head
 		head = next
 	}
-	return behind
+	return last
 }
 //leetcode submit region end(Prohibit modification and deletion)
