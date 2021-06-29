@@ -46,8 +46,7 @@ import (
 
 //leetcode submit region begin(Prohibit modification and deletion)
 func threeSum(nums []int) [][]int {
-	sortedNums := sort.IntSlice(nums)
-	sort.Sort(sortedNums)
+	sort.Sort(sort.IntSlice(nums))
 
 	ans := make([][]int, 0)
 	for i := 0; i < len(nums); i++ {
