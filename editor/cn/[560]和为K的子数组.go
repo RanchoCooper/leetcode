@@ -20,16 +20,20 @@ package main
 
 //leetcode submit region begin(Prohibit modification and deletion)
 func subarraySum(nums []int, k int) int {
-	var result int
+	sum := make([]int, len(nums) + 1)
+
+	// 构建前缀和
 	for i := 0; i < len(nums); i++ {
-		sum := 0
+		sum[i + 1] = sum[i] + nums[i]
+	}
+	ans := 0
+	for i := 0; i < len(nums); i++ {
 		for j := i; j < len(nums); j++ {
-			sum += nums[j]
-			if sum == k {
-				result ++
+			if sum[j + 1] - sum[i] == k {
+				ans++
 			}
 		}
 	}
-	return result
+	return ans
 }
 //leetcode submit region end(Prohibit modification and deletion)
