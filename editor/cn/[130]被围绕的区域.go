@@ -44,8 +44,7 @@ func solve(board [][]byte)  {
 		return
 	}
 
-	rows := len(board)
-	cols := len(board[0])
+	rows, cols := len(board), len(board[0])
 	dx, dy := []int{-1, 1, 0, 0}, []int{0, 0, -1, 1}
 
 	var dfs func([][]byte, int, int)
