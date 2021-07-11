@@ -26,7 +26,7 @@ package main
 //
 // 说明: 
 //
-// 为什么返回数值是整数，但输出的答案是数组呢? 
+// 为什么返回数值是整数，但输出的答案是数组呢?
 //
 // 请注意，输入数组是以「引用」方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。 
 //
@@ -48,8 +48,9 @@ package main
 //leetcode submit region begin(Prohibit modification and deletion)
 func removeDuplicates(nums []int) int {
 	n := 0
+
 	for i := 0; i < len(nums); i++ {
-		if i == 0 || nums[i] != nums[i-1] {
+		if i == 0 || nums[i] != nums[i - 1] {
 			nums[n] = nums[i]
 			n++
 		}
