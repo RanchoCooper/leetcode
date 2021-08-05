@@ -64,6 +64,7 @@ package main
  */
 func hasCycle(head *ListNode) bool {
 	fast := head
+
 	for fast != nil && fast.Next != nil {
 		fast = fast.Next.Next
 		head = head.Next
