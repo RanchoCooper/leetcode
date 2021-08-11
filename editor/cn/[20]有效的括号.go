@@ -58,23 +58,27 @@ package main
 
 //leetcode submit region begin(Prohibit modification and deletion)
 func isValid(s string) bool {
+	if len(s) % 2 == 1 {
+		return false
+	}
+
 	m := map[string]string {
 		")": "(",
 		"]": "[",
 		"}": "{",
 	}
-	var stack []string
+
+	stack := make([]string, 0)
 	for _, c := range s {
 		c := string(c)
 		if _, ok := m[c]; ok {
-			if len(stack) > 0 {
-				if stack[len(stack) -1] == m[c] {
-					stack = stack[:len(stack) - 1]
-				} else {
-					return false
-				}
-			} else {
+			if len(stack) == 0 {
 				return false
+			}
+			if stack[len(stack) - 1] != m[c] {
+				return false
+			} else {
+				stack = stack[:len(stack) - 1]
 			}
 		} else {
 			stack = append(stack, c)
