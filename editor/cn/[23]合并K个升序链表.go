@@ -1,5 +1,8 @@
 package main
-//给你一个链表数组，每个链表都已经按升序排列。 
+
+import "container/heap"
+
+//给你一个链表数组，每个链表都已经按升序排列。
 //
 // 请你将所有链表合并到一个升序链表中，返回合并后的链表。 
 //
@@ -55,36 +58,54 @@ package main
  *     Next *ListNode
  * }
  */
-func mergeKLists(lists []*ListNode) *ListNode {
-	if len(lists) == 0 {
-		return nil
-	}
-	current := lists[0]
+type NodeSlice []*ListNode
 
-
-	for i := 1; i < len(lists); i++ {
-		current = mergeTwoLists(current, lists[i])
-	}
-	return current
+func (n NodeSlice) Len() int {
+	return len(n)
 }
 
-func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
-	if l1 == nil && l2 == nil {
-		return nil
-	}
-	if l1 == nil {
-		return l2
-	}
-	if l2 == nil {
-		return l1
+func (n NodeSlice) Less(i, j int) bool {
+	return n[i].Val < n[j].Val
+}
+
+func (n *NodeSlice) Swap(i, j int) {
+	(*n)[i], (*n)[j] = (*n)[j], (*n)[i]
+}
+
+func (n *NodeSlice) Push(v interface{}) {
+	node := v.(*ListNode)
+	*n = append(*n, node)
+}
+
+func (n *NodeSlice) Pop() interface{} {
+	node := (*n)[len(*n) - 1]
+	*n = (*n)[: len(*n) - 1]
+	return node
+}
+
+func mergeKLists(lists []*ListNode) *ListNode {
+	h := &NodeSlice{}
+	heap.Init(h)
+
+	for _, list := range lists {
+		if list == nil {
+			continue
+		}
+		heap.Push(h, list)
 	}
 
-	if l1.Val <= l2.Val {
-		l1.Next = mergeTwoLists(l1.Next, l2)
-		return l1
-	} else {
-		l2.Next = mergeTwoLists(l1, l2.Next)
-		return l2
+	ans := &ListNode{}
+	head := ans
+
+	for h.Len() > 0 {
+		tmp := heap.Pop(h).(*ListNode)
+		head.Next = tmp
+		if tmp.Next != nil {
+			heap.Push(h, tmp.Next)
+		}
+
+		head = head.Next
 	}
+	return ans.Next
 }
 //leetcode submit region end(Prohibit modification and deletion)
