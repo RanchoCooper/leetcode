@@ -1,4 +1,3 @@
-package main
 //给定一个由 整数 组成的 非空 数组所表示的非负整数，在该数的基础上加一。 
 //
 // 最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。 
@@ -38,8 +37,8 @@ package main
 // 1 <= digits.length <= 100 
 // 0 <= digits[i] <= 9 
 // 
-// Related Topics 数组 
-// 👍 709 👎 0
+//
+// Related Topics 数组 数学 👍 1365 👎 0
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
@@ -48,15 +47,17 @@ func plusOne(digits []int) []int {
 	if n == 0 {
 		return []int{}
 	}
+
 	var r int
-	for i := n -1 ; i >= 0; i-- {
+	for i := n - 1; i >= 0; i-- {
 		r = digits[i] + 1
 		digits[i] = r % 10
 		if r / 10 == 0 {
 			break
 		}
 	}
-	if digits[0] == 0 && r / 10 != 0 {
+
+	if digits[0] == 0 || r / 10 != 0 {
 		digits = append([]int{1}, digits...)
 	}
 	return digits
